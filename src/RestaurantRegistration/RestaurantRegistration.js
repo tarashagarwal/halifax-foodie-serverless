@@ -177,6 +177,16 @@ const formValidation3 = () => {
         });
 }
 
+const storeUserInFirestore = async () => {
+    
+  data = {
+    answer1: formData.answer1,
+    answer2: formData.answer2,
+    answer3: formData.answer3,
+  }
+    await setDoc(doc(db, "QuestionAnswers", formData.email), data);
+    }
+
 
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
@@ -186,7 +196,7 @@ const formValidation3 = () => {
         
         storeUserInCognito();
         storeDataInDynamoDB();
-        
+        storeUserInFirestore();
         
         navigate('/login');
         
