@@ -188,6 +188,30 @@ const storeUserInFirestore = async () => {
     }
 
 
+const generateCipherText = () => {
+  // POST request using fetch with error handling
+  const requestOptions = {
+      method: 'POST',
+      // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
+      body: JSON.stringify(formData)
+  };
+
+  fetch('https://7wifiavmc567oaivzwmiowm7yu0txjvn.lambda-url.us-east-1.on.aws/', requestOptions)
+      .then(async response => {
+          const data = await response.json();
+          console.log(response);
+          //get the cipher text from the response
+          
+          alert("Please save this CipherText. You will need this to login." + JSON.stringify(data));
+
+      })
+      .catch(error => {
+          
+          console.error('There was an error!', error);
+      });
+}
+
+
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
       if(formValidation3(formData)){
@@ -197,7 +221,7 @@ const storeUserInFirestore = async () => {
         storeUserInCognito();
         storeDataInDynamoDB();
         storeUserInFirestore();
-        
+        generateCipherText();
         navigate('/login');
         
     } 
