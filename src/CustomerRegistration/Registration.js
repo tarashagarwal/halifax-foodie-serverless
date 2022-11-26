@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Registration1 from "./Registration1";
 import Registration2 from "./Registration2";
 import Registration3 from "./Registration3";
+import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import UserPool from ".././UserPool";
 
 import { useNavigate } from "react-router-dom";
 
@@ -109,7 +111,24 @@ function Regisration() {
   
 
 
-
+    const storeUserInCognito = () => {
+        const attributeList = [];
+          attributeList.push(
+            new CognitoUserAttribute({
+              Name: 'email',
+              Value: formData.email,
+            })
+          );
+          UserPool.signUp(formData.email, formData.password, attributeList, null, (err, data) => {
+            if (err) {
+              console.log(err);
+              alert("Couldn't sign up");
+            } else {
+              console.log(data);
+              alert('User Added Successfully');
+            }
+          });
+      }
 
 
 
@@ -131,7 +150,7 @@ function Regisration() {
         alert("FORM SUBMITTED");
         console.log(formData);
         
-       
+       storeUserInCognito();
         navigate('/login');
         }
     
