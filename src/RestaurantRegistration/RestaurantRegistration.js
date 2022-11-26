@@ -156,6 +156,28 @@ const formValidation3 = () => {
       });
   }
 
+  const storeDataInDynamoDB = () => {
+    // POST request using fetch with error handling
+    const requestOptions = {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
+        body: JSON.stringify(formData)
+    };
+
+    fetch('https://ylu2zikiiircel5br6qjsetoqi0uypqt.lambda-url.us-east-1.on.aws/', requestOptions)
+        .then(async response => {
+            const data = await response.json();
+
+            console.log(response);
+
+        })
+        .catch(error => {
+            
+            console.error('There was an error!', error);
+        });
+}
+
+
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
       if(formValidation3(formData)){
@@ -163,7 +185,7 @@ const formValidation3 = () => {
         console.log(formData);
         
         storeUserInCognito();
-        
+        storeDataInDynamoDB();
         
         
         navigate('/login');
