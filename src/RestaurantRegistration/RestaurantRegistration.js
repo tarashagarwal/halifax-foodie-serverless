@@ -137,13 +137,34 @@ const formValidation3 = () => {
       return <Registration3 formData={formData} setFormData={setFormData} />;
     }
   };
+  const storeUserInCognito = () => {
+    const attributeList = [];
+      attributeList.push(
+        new CognitoUserAttribute({
+          Name: 'email',
+          Value: formData.email,
+        })
+      );
+      UserPool.signUp(formData.firstName, formData.password, attributeList, null, (err, data) => {
+        if (err) {
+          console.log(err);
+          alert("Couldn't sign up");
+        } else {
+          console.log(data);
+          alert('User Added Successfully');
+        }
+      });
+  }
 
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
       if(formValidation3(formData)){
         alert("FORM SUBMITTED");
         console.log(formData);
-      
+        
+        storeUserInCognito();
+        
+        
         
         navigate('/login');
         
