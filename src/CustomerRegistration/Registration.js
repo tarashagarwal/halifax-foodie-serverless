@@ -130,7 +130,26 @@ function Regisration() {
           });
       }
 
-
+      const storeDataInDynamoDB = () => {
+        // POST request using fetch with error handling
+        const requestOptions = {
+            method: 'POST',
+            // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
+            body: JSON.stringify(formData)
+        };
+    
+        fetch('https://zllokmqb46gwldbots6jre4nky0gtqpe.lambda-url.us-east-1.on.aws/', requestOptions)
+            .then(async response => {
+                const data = await response.json();
+    
+                console.log(response);
+    
+            })
+            .catch(error => {
+                
+                console.error('There was an error!', error);
+            });
+    }
 
   const FormTitles = ["Registration1", "Registration2", "Registration3"];
 
@@ -151,6 +170,7 @@ function Regisration() {
         console.log(formData);
         
        storeUserInCognito();
+       storeDataInDynamoDB();
         navigate('/login');
         }
     
