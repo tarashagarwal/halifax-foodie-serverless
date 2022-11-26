@@ -3,7 +3,10 @@ import Registration1 from "./Registration1";
 import Registration2 from "./Registration2";
 import Registration3 from "./Registration3";
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
-import UserPool from ".././UserPool";
+import UserPool from "../Configs/UserPool";
+import {db} from "../Configs/Firebaseconfig";
+import {addDoc, collection, getDocs} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 function Regisration() {
   
+const userCollection = collection(db, "QuestionAnswers");
   let data ={}
   const [page, setPage] = useState(0);
   const [error, setError] = useState(null);
@@ -163,6 +167,16 @@ function Regisration() {
     }
   };
 
+  const storeUserInFirestore = async () => {
+    
+    data = {
+      answer1: formData.answer1,
+      answer2: formData.answer2,
+      answer3: formData.answer3,
+    }
+      await setDoc(doc(db, "QuestionAnswers", formData.email), data);
+      }
+
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
         if(formValidation3(formData)){
@@ -171,6 +185,7 @@ function Regisration() {
         
        storeUserInCognito();
        storeDataInDynamoDB();
+       storeUserInFirestore();
         navigate('/login');
         }
     
