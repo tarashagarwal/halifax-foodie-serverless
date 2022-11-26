@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Registration from './CustomerRegistration/Registration';
-import RestaurantRegistration from './RestaurantLogin/RestaurantRegistration';
+import RestaurantRegistration from './RestaurantRegistration/RestaurantRegistration';
 function App() {
   return (
     <BrowserRouter>
