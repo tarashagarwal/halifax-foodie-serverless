@@ -5,6 +5,7 @@ import Home from './Home';
 import Registration from './CustomerRegistration/Registration';
 import RestaurantRegistration from './RestaurantRegistration/RestaurantRegistration';
 import Login from './Login/Login';
+import CustomerDashboard from './Dashboards/CustomerDashboard';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <Route exact path = 'register' element={<Registration/>}/>
       <Route exact path="/RestaurantRegistration1" element={<RestaurantRegistration/>}/>
       <Route exact path="/Login" element={<Login/>}/>      
-      
+      <Route exact path="/CustomerDashboard" element={<CustomerDashboard/>}/>
 
 </Routes>
     </BrowserRouter>
