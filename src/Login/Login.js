@@ -6,6 +6,7 @@ import Login3 from "./Login3";
 import UserPool from "../Configs/UserPool";
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
+import {db} from "../Configs/Firebaseconfig";
 
 import {addDoc, collection, doc, getDoc} from "firebase/firestore";
 
@@ -15,7 +16,7 @@ import {addDoc, collection, doc, getDoc} from "firebase/firestore";
 
 function Login() {
     
-
+  const userCollection = collection(db, "QuestionAnswers");
   const [page, setPage] = useState(0);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -59,6 +60,29 @@ function Login() {
       return true;
     }
 
+
+      //get data from firestore for a specific user
+const getdata = async () => {
+  const docRef = doc(db, "QuestionAnswers", formData.email);
+  const docSnap = await getDoc(docRef);
+  
+  if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      var answer1 = docSnap.data().answer1;
+      var answer2 = docSnap.data().answer2;
+      var answer3 = docSnap.data().answer3;
+      if(answer1 === formData.answer1 && answer2 === formData.answer2 && answer3 === formData.answer3) {
+      alert("Correct answers");
+      setPage((currPage) => currPage + 1); 
+      }
+      else {
+      alert("Incorrect answers");
+      }
+  } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+  }
+}
 
     const authenticateUserUsingCognito = () => {
       const user = new CognitoUser({
@@ -119,7 +143,8 @@ function Login() {
       }
       else if(page===1){
         if (formValidation2(formData)) {
-          setPage((currPage) => currPage + 1);  
+          getdata();
+
         }
   
       }
