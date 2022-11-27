@@ -244,7 +244,7 @@ const getdata = async () => {
         
         if (formValidation1(formData)) {
           authenticateUserUsingCognito();
-          setPage((currPage) => currPage + 1);  
+          
         }
         
       }
