@@ -3,7 +3,7 @@ import Login1 from "./Login1";
 import Login2 from "./Login2";
 import Login3 from "./Login3";
 
-
+import UserPool from "../Configs/UserPool";
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
 
@@ -59,6 +59,29 @@ function Login() {
       return true;
     }
 
+
+    const authenticateUserUsingCognito = () => {
+      const user = new CognitoUser({
+          Username: formData.email,
+          Pool: UserPool
+      })
+      const authDetails = new AuthenticationDetails({
+          Username: formData.email,
+          Password: formData.password
+      })
+      user.authenticateUser(authDetails, {
+          onSuccess: (data) => {
+              console.log("onSuccess: ", data)
+              setPage((currPage) => currPage + 1);  
+          },
+          onFailure: (err) => {
+              alert("Incorrect email or password")
+          }
+      })
+
+  
+  }
+
   const FormTitles = ["Login1", "Login2", "Login3"];
 
   const PageDisplay = () => {
@@ -89,7 +112,7 @@ function Login() {
         if(page===0){
         
         if (formValidation1(formData)) {
-         
+          authenticateUserUsingCognito();
           setPage((currPage) => currPage + 1);  
         }
         
