@@ -7,6 +7,7 @@ import RestaurantRegistration from './RestaurantRegistration/RestaurantRegistrat
 import Login from './Login/Login';
 import CustomerDashboard from './Dashboards/CustomerDashboard/CustomerDashboard';
 import RestaurantDashboard from './Dashboards/RestaurantDashboard/RestaurantDashboard';
+import UploadRecipe from './Dashboards/RestaurantDashboard/UploadRecipe';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route exact path="/Login" element={<Login/>}/>      
       <Route exact path="/CustomerDashboard" element={<CustomerDashboard/>}/>
       <Route exact path="/RestaurantDashboard" element={<RestaurantDashboard/>}/>
+      <Route exact path="/UploadRecipe" element={<UploadRecipe/>}/>
 </Routes>
     </BrowserRouter>
     
