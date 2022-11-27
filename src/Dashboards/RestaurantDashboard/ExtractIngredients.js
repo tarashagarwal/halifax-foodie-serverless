@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';    
 import S3 from 'react-aws-s3';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,10 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // a React functional component, used to create a simple upload input and button
 
-function UploadRecipe() {
-    
-    window.Buffer = window.Buffer || require("buffer").Buffer;
-    
+function ExtractIngredients() {
+  
     let recipe = "";    
     let recipename = "";
     let recipeid = "";
@@ -27,13 +25,7 @@ function UploadRecipe() {
     let ingredient = "";
     const [selectedFile, setSelectedFile] = useState(null);
 
-    // the configuration information is fetched from the .env file
-    const config = {
-        bucketName: "serverless-assignment1-b00890152",
-        region: "us-west-2",
-        accessKeyId: "AKIAZDZ3OZNH2RTFIHGY",
-        secretAccessKey: "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",
-    }
+    
 
     //generate a random id for the recipe
     const generateId = () => {
@@ -48,69 +40,7 @@ function UploadRecipe() {
         setSelectedFile(e.target.files[0]);
     }
 
-    const uploadFile = async (file) => {
-        
-        const ReactS3Client = new S3(config);
-//        the name of the file uploaded is used to upload it to S3
-        ReactS3Client
-        .uploadFile(file, file.name)
-        .then(data => console.log(data.location))
-        .catch(err => console.error(err))
-       
-        
-        
-        
-        recipename = file.name; 
-        //get file data in string format    
-        const reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function() {
-            recipe = reader.result;
-
-            //remove .txt from file name
-            recipename = recipename.replace(".txt", "");
-
-            storeDataInDynamoDB(recipe, recipename);
-            setTimeout(function() { ListOfRecipesLambda() }, 5000);
-            
-        }   
-
-    }
-
-
-    const storeDataInDynamoDB = () => {
-        // POST request using fetch with error handling
-        const requestOptions = {
-            method: 'POST',
-            // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
-            body: JSON.stringify({
-                "recipeid": recipeid,
-                "restaurantName": localStorage.getItem("email"),
-                "recipename": recipename,
-                "recipe": recipe,
-                "ingredients": "",
-                "price": ""
-
-            })
-        };
-    
-        fetch('https://gs4zohdfkk4crhe7g5wnl2hge40ytyrz.lambda-url.us-east-1.on.aws/', requestOptions)
-            .then(async response => {
-                const data = await response.text();
-    
-                console.log(response);
-                //get list of recipe from response
-               response = JSON.parse(data);
-               
-    
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }
-    
-
-
+   
 
     const ListOfRecipesLambda = () => {
         // POST request using fetch with error handling
@@ -142,7 +72,7 @@ function UploadRecipe() {
 
 
 
-   
+
     
     
     const onSubmit = (e) => {
@@ -150,6 +80,8 @@ function UploadRecipe() {
         ListOfRecipesLambda();
         
     }
+
+    //call function wh
 
     
     const getIngredients = (id) => {
@@ -202,55 +134,45 @@ function UploadRecipe() {
     }
     
 
+
     return <div>
-        <div>React S3 File Upload</div>
-        <input type="file" onChange={handleFileInput}/>
-        <br></br>
-        <button onClick={() => uploadFile(selectedFile)}> Upload to S3</button>
-        {/* <button onClick={onSubmit}>Extract Ingredients</button> */}
+
+        <button onClick={onSubmit}>Extract Ingredients</button>
 
 
+        
 
+        
+       
         <table>
             <thead>
                 <tr>
                     <th>Recipe Name</th>
-                    <th>Uploded</th>
-                    
+                    <th>Extract Ingredients</th>
                 </tr>
             </thead>
             <tbody>
                 {recipeList.map((recipe) => (
                     <tr key={recipe.recipeid}>
                         <td>{recipe.recipename}</td>
-                        <td>Yes</td>
+                        <td><button onClick={() => getIngredients(recipe.recipeid)}>Extract Ingredients</button></td>
                     </tr>
                 ))}
             </tbody>
         </table>
-    
+        <ToastContainer />
 
+                
+                    
 
-
-
-            <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            />
             
 
+            
+            
         
         
 
     </div>
 }
 
-export default UploadRecipe;
+export default ExtractIngredients;
