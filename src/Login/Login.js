@@ -28,6 +28,36 @@ function Login() {
     ciphertext: "",
   });
 
+  const formValidation2 = () => {
+    if(formData.answer1 === "" || formData.answer2 === "" || formData.answer3 === "") {
+      alert("Please answer all security questions");
+      return false;
+    }
+    return true;
+  }
+  const formValidation3 = () => {
+    if(formData.ciphertext === "") {
+      alert("Please enter a ciphertext");
+      return false;
+    }
+    return true;
+  }
+  
+  
+  
+    const formValidation1 = () => {
+      if (formData.email === "") {
+        alert("Please enter your email");
+        return false;
+      } else if(formData.email.indexOf("@") === -1) {
+        alert("Please enter a valid email");
+        return false;
+      } else if (formData.password === "") {
+        alert("Please enter your password");
+        return false;
+      } 
+      return true;
+    }
 
   const FormTitles = ["Login1", "Login2", "Login3"];
 
@@ -56,26 +86,24 @@ function Login() {
     
   }
   else {
-      if(page===0){
+        if(page===0){
         
-        setPage((currPage) => currPage + 1);  
-        
-           
-    
+        if (formValidation1(formData)) {
+         
+          setPage((currPage) => currPage + 1);  
+        }
         
       }
-    
       else if(page===1){
-     
-            
-        setPage((currPage) => currPage + 1);  
-  
-     
-    }
-      else if(page===2){
-    
+        if (formValidation2(formData)) {
           setPage((currPage) => currPage + 1);  
-    
+        }
+  
+      }
+      else if(page===2){
+        if (formValidation3(formData)) {
+          setPage((currPage) => currPage + 1);  
+        }
         
       }
       
