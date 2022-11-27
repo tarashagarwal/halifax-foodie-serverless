@@ -106,6 +106,107 @@ const getdata = async () => {
   
   }
 
+  const ciphertextforCustomer = () => {
+
+    // POST request using fetch with error handling
+    const requestOptions = {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
+        body: JSON.stringify(formData)
+    };
+
+    fetch('https://3tesarwbkmin5m2u2ilxmsrb4a0fibfb.lambda-url.us-east-1.on.aws/', requestOptions)
+        .then(async response => {
+            const data = await response.json();
+
+            console.log(response);
+            var ciphertext = JSON.stringify(data);
+                var stringwithoutquotes = ciphertext.replace(/['"]+/g, '');
+
+
+                if(stringwithoutquotes === formData.ciphertext) {
+                  navigate("/CustomerDashboard");
+                }
+                else {
+                    alert("Incorrect ciphertext");
+                    }
+            
+
+        })
+        .catch(error => {
+            
+            console.error('There was an error!', error);
+        });
+
+
+  }
+
+  const ciphertextforRestaurant = () => {
+
+    // POST request using fetch with error handling
+    const requestOptions = {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
+        body: JSON.stringify(formData)
+    };
+
+    fetch('https://sujj5roew6ye6fwxeeaiwvguuu0ddwxy.lambda-url.us-east-1.on.aws/', requestOptions)
+        .then(async response => {
+            const data = await response.json();
+            console.log(response);
+
+            var ciphertext = JSON.stringify(data);
+            var stringwithoutquotes = ciphertext.replace(/['"]+/g, '');
+
+
+            if(stringwithoutquotes === formData.ciphertext) {
+              navigate("/RestaurantDashboard");
+            }
+            else {
+                alert("Incorrect ciphertext");
+                }
+
+        })
+        .catch(error => {
+            
+            console.error('There was an error!', error);
+        });
+}
+  const checkCustomerLambda = () => {
+    // POST request using fetch with error handling
+    const requestOptions = {
+        method: 'POST',
+        // headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'Access-Control-Expose-Headers': 'Access-Control-Allow-Origin' },
+        body: JSON.stringify(formData)
+    };
+  
+    fetch('https://taar64njhgfd4np4eea3lshzay0usvlt.lambda-url.us-east-1.on.aws/', requestOptions)
+        .then(async response => {
+            const data = await response.json();
+            //response to string
+            alert("Please save this CipherText. You will need this to login." + JSON.stringify(data));
+            if(JSON.stringify(data) === '"true"') {
+              //if the user is a customer, go to the next page
+             ciphertextforCustomer();
+            localStorage.setItem("email", formData.email);
+            localStorage.setItem("CustomerType", "Customer");
+             // navigate(`/CustomerDashboard`);
+            }
+            else{
+                //if the user is not a customer, go to the next page
+               
+               ciphertextforRestaurant();
+                localStorage.setItem("email", formData.email);
+                localStorage.setItem("CustomerType", "Restaurant");     
+               // navigate(`/RestaurantDashboard`);
+            }
+        })
+        .catch(error => {
+            
+            console.error('There was an error!', error);
+        });
+  }
+
   const FormTitles = ["Login1", "Login2", "Login3"];
 
   const PageDisplay = () => {
@@ -122,15 +223,21 @@ const getdata = async () => {
 
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
-      
+      if(formValidation3(formData)){
         alert("FORM SUBMITTED");
         console.log(formData);
-        
 
         
         
+
+
+
         
-    
+
+        checkCustomerLambda();
+        
+        
+    } 
   }
   else {
         if(page===0){
