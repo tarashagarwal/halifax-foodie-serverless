@@ -9,6 +9,8 @@ import CustomerDashboard from './Dashboards/CustomerDashboard/CustomerDashboard'
 import RestaurantDashboard from './Dashboards/RestaurantDashboard/RestaurantDashboard';
 import UploadRecipe from './Dashboards/RestaurantDashboard/UploadRecipe';
 import ExtractIngredients from './Dashboards/RestaurantDashboard/ExtractIngredients';
+import OnlineSupport from './Components/OnlineSupport';
+import Chat from './Components/Chat';
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
       <Route exact path="/RestaurantDashboard" element={<RestaurantDashboard/>}/>
       <Route exact path="/UploadRecipe" element={<UploadRecipe/>}/>
       <Route exact path="/ExtractIngredients" element={<ExtractIngredients/>}/> 
+      <Route path="/online-support" element={<OnlineSupport />} />
+      <Route path="/chat" element={<Chat />} />
+
 </Routes>
     </BrowserRouter>
     
