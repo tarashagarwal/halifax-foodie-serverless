@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { AccountContext } from './Account';
 import {ChatMessage} from './ChatMessage';
-import {Polling} from './Polling';
 import React from 'react';
 import '../stylesheets/online-support.css';
 
