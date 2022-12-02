@@ -5,8 +5,8 @@ import Registration3 from "./Registration3";
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import UserPool from '../Configs/UserPool';
 import {db} from '../Configs/Firebaseconfig';
-import {addDoc, collection, getDocs} from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
+import {addDoc, collection, getDocs} from "firebase2/firestore";
+import { doc, setDoc } from "firebase2/firestore";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const storeUserInCognito = () => {
         Value: formData.email,
       })
     );
-    UserPool.signUp(formData.email, formData.password, attributeList, null, (err, data) => {
+    UserPool.signUp(formData.firstName, formData.password, attributeList, null, (err, data) => {
       if (err) {
         console.log(err);
         alert("Couldn't sign up");

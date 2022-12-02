@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AccountContext } from './Account';
+
 import {ChatMessage} from './ChatMessage';
 import React from 'react';
 import '../stylesheets/online-support.css';

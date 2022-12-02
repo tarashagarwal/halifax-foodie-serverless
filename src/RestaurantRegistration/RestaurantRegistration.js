@@ -5,8 +5,8 @@ import Registration3 from "./RestaurantRegistration3";
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import UserPool from '../Configs/UserPool';
 import {db} from '../Configs/Firebaseconfig';
-import {addDoc, collection, getDocs} from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
+// import {addDoc, collection, getDocs} from "firebase/firestore";
+import { doc, setDoc } from "firebase2/firestore";
 
 
 import axios from 'axios';

@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import '../stylesheets/chat.css';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import 'firebase/analytics';
+import firebase from 'firebase1/app';
+import 'firebase1/firestore';
+import 'firebase1/auth';
+import 'firebase1/analytics';
 import {ChatMessage} from './ChatMessage';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -40,13 +40,14 @@ function ChatRoom() {
   const userKey = "email"
   const oppositeUserKey = "opposite_user_id"
   var userInParameter = window.location.search.substr(1).split("=")[1]
-  
+  var currentUser = window.localStorage.getItem(userKey);
+
   if(userInParameter != "" && userInParameter != undefined){
-      var currentUser = window.localStorage.getItem(userKey);
+     currentUser = userInParameter
   }
 
   var oppositeUser = window.localStorage.getItem(oppositeUserKey);
-  if(oppositeUser == ""){
+  if(oppositeUser == "" || oppositeUser == undefined){
     oppositeUser = 'support@halifaxfoodie.com'
   }
 

@@ -8,7 +8,7 @@ import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
 import {db} from "../Configs/Firebaseconfig";
 
-import {addDoc, collection, doc, getDoc} from "firebase/firestore";
+import {addDoc, collection, doc, getDoc} from "firebase2/firestore";
 
 
 
@@ -266,6 +266,9 @@ const getdata = async () => {
 }
 
   return (
+
+
+
     <div className="form">
       <div className="progressbar">
         <div
