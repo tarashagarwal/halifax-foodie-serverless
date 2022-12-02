@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';    
-import S3 from 'react-aws-s3';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
 
 
 
+function Visual() {
 
-// installed using npm install buffer --save
-
-
-// a React functional component, used to create a simple upload input and button
-
-function ShowVisualizations() {
-  
     
 
+    return(
 
-    return <div>
+        <div>
 
-        <h1>Visualizations</h1> 
-        
+             <iframe width="600" height="450"
+
+              src="https://datastudio.google.com/embed/reporting/0fa1f086-b85a-471e-b1f4-7311f557dc4c/page/HpJ9C"
+
+             ></iframe>
+
         </div>
+
+        
+
+    );
+
 }
 
-export default ShowVisualizations;
+
+
+export default Visual;

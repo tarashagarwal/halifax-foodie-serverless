@@ -11,6 +11,7 @@ import UploadRecipe from './Dashboards/RestaurantDashboard/UploadRecipe';
 import ExtractIngredients from './Dashboards/RestaurantDashboard/ExtractIngredients';
 import OnlineSupport from './Components/OnlineSupport';
 import Chat from './Components/Chat';
+import Visual from './Dashboards/RestaurantDashboard/ShowVisualizations';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route exact path="/ExtractIngredients" element={<ExtractIngredients/>}/> 
       <Route path="/online-support" element={<OnlineSupport />} />
       <Route path="/chat" element={<Chat />} />
+      <Route exact path="/visual" element={<Visual/>}/>
 
 </Routes>
     </BrowserRouter>

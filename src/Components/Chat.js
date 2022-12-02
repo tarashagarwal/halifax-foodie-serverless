@@ -71,9 +71,15 @@ function ChatRoom() {
     //get uid from local Storage
     const userKey = "email"
     const oppositeUserKey = "opposite_user_id"
-  
+    var userInParameter = window.location.search.substr(1).split("=")[1]
     var currentUser = window.localStorage.getItem(userKey);
+    if(userInParameter != "" && userInParameter != undefined){
+      currentUser = userInParameter
+   }
     var oppositeUser = window.localStorage.getItem(oppositeUserKey);
+    if(oppositeUser == "" || oppositeUser == undefined){
+      oppositeUser = 'support@halifaxfoodie.com'
+    }
 
     await messagesRef.add({
       text: formValue,
