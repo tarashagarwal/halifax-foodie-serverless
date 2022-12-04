@@ -4,8 +4,7 @@ function Login3( {formData,setFormData} ) {
 
   return (
     <div className="other-info-container">
-
-<div>
+    <div>
       <input
         type="text"
         placeholder="Ciphertext..."
@@ -14,9 +13,7 @@ function Login3( {formData,setFormData} ) {
           setFormData({ ...formData, ciphertext: e.target.value });
         }}
       />
-     
     </div>
-
     </div>
   );
 }

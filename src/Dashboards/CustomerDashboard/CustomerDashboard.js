@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';    
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,17 +12,13 @@ function CustomerDashboard() {
         window.onpopstate = function () {
             window.history.go(1);
         };
-
         localStorage.clear();
     }
     return (
         <div>
-
             <h1>CustomerDashboard</h1>
-            
             <button onClick={logout}>logout</button>
         </div>
     )
-
 }
 export default CustomerDashboard
