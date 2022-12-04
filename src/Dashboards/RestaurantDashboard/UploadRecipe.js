@@ -21,6 +21,7 @@ function UploadRecipe() {
         secretAccessKey: "O13+697J82QwhWqLz4sC6r7TJbV12YYWZXdgOPR4",
     }
 
+    //generating a random recipe id
     const generateId = () => {
         return Math.floor(Math.random() * 1000000000);
     }
@@ -32,6 +33,16 @@ function UploadRecipe() {
         setSelectedFile(e.target.files[0]);
     }
 
+    
+
+//Author(s) name: NamyaLG
+//Date: 28 November 2022
+//Title of program/source code: Upload files to Amazon S3 from a React Frontend
+//Code version: v1
+//Type: Code
+//Web address: https://blog.devgenius.io/upload-files-to-amazon-s3-from-a-react-frontend-fbd8f0b26f5
+
+//This function is used to upload the recipe to S3 bucket
     const uploadFile = async (file) => {
 
         const ReactS3Client = new S3(config);
@@ -50,7 +61,14 @@ function UploadRecipe() {
         }
     }
 
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
+//This function is used to call lambda function using fetch API
     const storeDataInDynamoDB = () => {
         const requestOptions = {
             method: 'POST',
@@ -75,6 +93,14 @@ function UploadRecipe() {
             });
     }
 
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call lambda function using fetch API
     const ListOfRecipesLambda = () => {
         const requestOptions = {
             method: 'POST',
@@ -91,46 +117,6 @@ function UploadRecipe() {
                     list.push(response[i]);
                 }
                 setRecipeList(list);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        ListOfRecipesLambda();
-
-    }
-
-    const getIngredients = (id) => {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify({
-                "recipeid": id
-            })
-        };
-        fetch('https://qsjuo6lqt3pv7z7q35q332elmu0utnwt.lambda-url.us-east-1.on.aws/', requestOptions)
-            .then(async response => {
-                const data = await response.text();
-                console.log(response);
-                response = JSON.parse(data);
-                for (var i = 0; i < response.length; i++) {
-                    ingredient = ingredient + response[i] + ", ";
-                }
-                ingredient = ingredient.slice(0, -2);
-                toast.info(ingredient, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    width: 1000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-                ingredient = "";
             })
             .catch(error => {
                 console.error('There was an error!', error);

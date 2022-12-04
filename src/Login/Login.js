@@ -8,6 +8,16 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../Configs/Firebaseconfig";
 import { addDoc, collection, doc, getDoc, setDoc} from "firebase2/firestore";
 
+
+//Author(s) name: machadop1407
+//Date: 28 November 2022
+//Title of program/source code: multi-step-form-react
+//Code version: v1
+//Type: Code
+//Web address: https://github.com/machadop1407/multi-step-form-react
+
+//This code is a multi-step form that allows users to register as a customer or restaurant. It uses React and Firebase.
+
 function Login() {
   let data = {}
   const userCollection = collection(db, "QuestionAnswers");
@@ -23,6 +33,8 @@ function Login() {
     ciphertext: "",
   });
 
+  
+  //This function is used to validate the second page of the form
   const formValidation2 = () => {
     if (formData.answer1 === "" || formData.answer2 === "" || formData.answer3 === "") {
       alert("Please answer all security questions");
@@ -30,6 +42,8 @@ function Login() {
     }
     return true;
   }
+
+  //This function is used to validate the third page of the form
   const formValidation3 = () => {
     if (formData.ciphertext === "") {
       alert("Please enter a ciphertext");
@@ -38,6 +52,7 @@ function Login() {
     return true;
   }
 
+  //This function is used to validate the first page of the form
   const formValidation1 = () => {
     if (formData.email === "") {
       alert("Please enter your email");
@@ -52,6 +67,14 @@ function Login() {
     return true;
   }
 
+//Author(s) name: SoftAuuthor
+//Date: 28 November 2022
+//Title of program/source code: Firebase 9 Firestore Get A Document By ID Using getDoc()
+//Code version: v1
+//Type: Code
+//Web address: https://softauthor.com/firebase-firestore-get-document-by-id/
+
+  //This function is used to get answers to security questions from firestore and compare them to the answers entered by the user
   const getdata = async () => {
     const docRef = doc(db, "QuestionAnswers", formData.email);
     const docSnap = await getDoc(docRef);
@@ -62,6 +85,7 @@ function Login() {
       var answer2 = docSnap.data().answer2;
       var answer3 = docSnap.data().answer3;
       if (answer1 === formData.answer1 && answer2 === formData.answer2 && answer3 === formData.answer3) {
+        //navigate user to the next page of the form
         setPage((currPage) => currPage + 1);
       }
       else {
@@ -72,6 +96,14 @@ function Login() {
     }
   }
 
+  //Author(s) name: AWS Developer Guide
+  //Date: 28 November 2022
+  //Title of program/source code: Authentication with User Pools
+  //Code version: v1
+  //Type: Code
+  //Web address: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
+
+  //This function is used to authenticate the user using Cognito
   const authenticateUserUsingCognito = () => {
     const user = new CognitoUser({
       Username: formData.email,
@@ -92,6 +124,15 @@ function Login() {
     })
   }
 
+
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call lambda function using fetch API
   const ciphertextforCustomer = () => {
     const requestOptions = {
       method: 'POST',
@@ -102,6 +143,7 @@ function Login() {
         const data = await response.json();
         console.log(response);
         var ciphertext = JSON.stringify(data);
+        //removing the first and last character of the ciphertext
         var stringwithoutquotes = ciphertext.replace(/['"]+/g, '');
         if (stringwithoutquotes === formData.ciphertext) {
           storeUserInFirestore();
@@ -117,7 +159,15 @@ function Login() {
       });
   }
 
-  const ciphertextforRestaurant = () => {
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call lambda function using fetch API
+const ciphertextforRestaurant = () => {
     const requestOptions = {
       method: 'POST',
       body: JSON.stringify(formData)
@@ -141,6 +191,14 @@ function Login() {
       });
   }
 
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call lambda function using fetch API
   const checkCustomerLambda = () => {
     const requestOptions = {
       method: 'POST',
@@ -151,15 +209,19 @@ function Login() {
         const data = await response.json();
         if (JSON.stringify(data) === '"true"') {
           ciphertextforCustomer();
+
+          //storing user information in local storage
           localStorage.setItem("email", formData.email);
           localStorage.setItem("CustomerType", "Customer");
           localStorage.setItem("opposite_user_id", "sticknet.assist@gmail.com");
         }
         else {
           ciphertextforRestaurant();
+
+          //storing user information in local storage
           localStorage.setItem("email", formData.email);
           localStorage.setItem("CustomerType", "Restaurant");
-          localStorage.setItem("opposite_user_id", "rahulmac175999@gmail.com");
+          localStorage.setItem("opposite_user_id", "rahulmac17599@gmail.com");
         }
       })
       .catch(error => {
@@ -179,6 +241,14 @@ function Login() {
     }
   };
 
+//Author(s) name: Firebase Documentation
+//Date: 28 November 2022
+//Title of program/source code: Add data to Cloud Firestore
+//Code version: v1
+//Type: Code
+//Web address: https://firebase.google.com/docs/firestore/manage-data/add-data
+
+//This function is used to store user information in firestore
   const storeUserInFirestore = async () => {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();

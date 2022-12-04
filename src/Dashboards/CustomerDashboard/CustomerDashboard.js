@@ -18,6 +18,7 @@ function CustomerDashboard() {
         <div>
             <h1>CustomerDashboard</h1>
             <button onClick={logout}>logout</button>
+            <button onClick={() => navigate(`/chat`)}>Chat</button>       
         </div>
     )
 }

@@ -30,6 +30,14 @@ function Regisration() {
     plaintext: ""
   });
 
+  //Author(s) name: Mayur Patel - cloudthat
+  //Date: 28 November 2022
+  //Title of program/source code: Detailed Guide to Register a User in AWS Cognito with ReactJS – Part 2
+  //Code version: v1
+  //Type: Code
+  //Web address: https://blog.cloudthat.com/detailed-guide-to-register-a-user-in-aws-cognito-with-reactjs-part-2/
+
+  //This function is used to authenticate the user using Cognito
   const storeUserInCognito = () => {
     const attributeList = [];
     attributeList.push(
@@ -48,6 +56,7 @@ function Regisration() {
     });
   }
 
+  //Validate input fields for Registration form 2
   const formValidation2 = () => {
     if (formData.answer1 === "" || formData.answer2 === "" || formData.answer3 === "") {
       alert("Please answer all security questions");
@@ -55,6 +64,8 @@ function Regisration() {
     }
     return true;
   }
+
+  //Validate input fields for Registration form 3
   const formValidation3 = () => {
     if (formData.key === "" || formData.plaintext === "") {
       alert("Please enter a key and plaintext");
@@ -71,6 +82,7 @@ function Regisration() {
     return true;
   }
 
+  //Validate input fields for Registration form 1
   const formValidation1 = () => {
     if (formData.firstName === "") {
       alert("Please enter your first name");
@@ -118,6 +130,15 @@ function Regisration() {
     return true;
   }
 
+
+//Author(s) name: Firebase Documentation
+//Date: 28 November 2022
+//Title of program/source code: Add data to Cloud Firestore
+//Code version: v1
+//Type: Code
+//Web address: https://firebase.google.com/docs/firestore/manage-data/add-data
+
+//This function is used to store user information in firestore
   const storeUserInFirestore = async () => {
     data = {
       answer1: formData.answer1,
@@ -128,7 +149,14 @@ function Regisration() {
   }
 
 
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
+//This function is used to call lambda function using fetch API
   const storeDataInDynamoDB = () => {
     const requestOptions = {
       method: 'POST',
@@ -144,7 +172,14 @@ function Regisration() {
       });
   }
 
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
+//This function is used to call lambda function using fetch API
   const generateCipherText = () => {
     const requestOptions = {
       method: 'POST',
@@ -183,7 +218,6 @@ function Regisration() {
         storeUserInFirestore();
         generateCipherText();
         navigate('/login');
-
       }
     }
     else {

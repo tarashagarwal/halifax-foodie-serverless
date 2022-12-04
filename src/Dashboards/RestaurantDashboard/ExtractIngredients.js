@@ -4,6 +4,7 @@ import S3 from 'react-aws-s3';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+//This function is used to extract the ingredients from the recipes
 function ExtractIngredients() {
 
     let recipeid = "";
@@ -12,6 +13,7 @@ function ExtractIngredients() {
     let ingredient = "";
     const [selectedFile, setSelectedFile] = useState(null);
 
+    //generating a random recipe id
     const generateId = () => {
         return Math.floor(Math.random() * 1000000000);
     }
@@ -24,7 +26,14 @@ function ExtractIngredients() {
     }
 
    
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
+//This function is used to call lambda function using fetch API
     const ListOfRecipesLambda = () => {
         const requestOptions = {
             method: 'POST',
@@ -51,7 +60,16 @@ function ExtractIngredients() {
         e.preventDefault();
         ListOfRecipesLambda();
     }
-    
+
+
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call lambda function using fetch API
     const getIngredients = (id) => {
         const requestOptions = {
             method: 'POST',
@@ -59,7 +77,6 @@ function ExtractIngredients() {
                 "recipeid": id
             })
         };
-    
         fetch('https://qsjuo6lqt3pv7z7q35q332elmu0utnwt.lambda-url.us-east-1.on.aws/', requestOptions)
             .then(async response => {
                 const data = await response.text();
@@ -68,8 +85,10 @@ function ExtractIngredients() {
                 for (var i = 0; i < response.length; i++) {
                     ingredient = ingredient + response[i] + ", ";
                 }
+                //remove last comma
                 ingredient = ingredient.slice(0, -2);
 
+                //display the ingredients in a toast
                 toast.info(ingredient, {
                     position: "top-center",
                     autoClose: 5000,
