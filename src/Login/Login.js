@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import Login1 from "./Login1";
 import Login2 from "./Login2";
 import Login3 from "./Login3";
-
 import UserPool from "../Configs/UserPool";
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
 import { db } from "../Configs/Firebaseconfig";
-
-import { addDoc, collection, doc, getDoc } from "firebase2/firestore";
+import { addDoc, collection, doc, getDoc, setDoc} from "firebase2/firestore";
 
 function Login() {
+  let data = {}
   const userCollection = collection(db, "QuestionAnswers");
   const [page, setPage] = useState(0);
   const [error, setError] = useState(null);
@@ -91,8 +90,6 @@ function Login() {
         alert("Incorrect email or password")
       }
     })
-
-
   }
 
   const ciphertextforCustomer = () => {
@@ -100,7 +97,6 @@ function Login() {
       method: 'POST',
       body: JSON.stringify(formData)
     };
-
     fetch('https://3tesarwbkmin5m2u2ilxmsrb4a0fibfb.lambda-url.us-east-1.on.aws/', requestOptions)
       .then(async response => {
         const data = await response.json();
@@ -109,6 +105,7 @@ function Login() {
         var ciphertext = JSON.stringify(data);
         var stringwithoutquotes = ciphertext.replace(/['"]+/g, '');
         if (stringwithoutquotes === formData.ciphertext) {
+          storeUserInFirestore();
           navigate("/CustomerDashboard");
         }
         else {
@@ -126,7 +123,6 @@ function Login() {
       method: 'POST',
       body: JSON.stringify(formData)
     };
-
     fetch('https://sujj5roew6ye6fwxeeaiwvguuu0ddwxy.lambda-url.us-east-1.on.aws/', requestOptions)
       .then(async response => {
         const data = await response.json();
@@ -134,6 +130,7 @@ function Login() {
         var ciphertext = JSON.stringify(data);
         var stringwithoutquotes = ciphertext.replace(/['"]+/g, '');
         if (stringwithoutquotes === formData.ciphertext) {
+          storeUserInFirestore();
           navigate("/RestaurantDashboard");
         }
         else {
@@ -183,10 +180,20 @@ function Login() {
     }
   };
 
+  const storeUserInFirestore = async () => {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time;
+    data = {
+      last_login: dateTime
+    }
+    await setDoc(doc(db, "LoginInformation", formData.email), data);
+  }
+
   const submitHandler = () => {
     if (page === FormTitles.length - 1) {
       if (formValidation3(formData)) {
-        // alert("FORM SUBMITTED");
         console.log(formData);
         checkCustomerLambda();
       }

@@ -21,10 +21,10 @@ function RestaurantDashboard() {
         };
         localStorage.clear();
     }
-
     const navigateShowVisualizations = () => {
-        navigate(`/ShowVisualizations`)
+        navigate(`/visual`)
     }
+    
 
     return (
         <div style={{ backgroundColor: "#F5F5F5" }}>
@@ -36,7 +36,7 @@ function RestaurantDashboard() {
                 <button onClick={navigateExtractIngredients}> Extract ingredients from Recipes </button>
             </div>
             <div>
-                <button onCLick={navigateShowVisualizations}> Show Visualizations </button>
+            <button onClick={navigateShowVisualizations}> Show Visualizations</button>
                 <div>
                     <button onClick={logout}>logout</button>
                 </div>
