@@ -88,7 +88,6 @@ function ExtractIngredients() {
                 //remove last comma
                 ingredient = ingredient.slice(0, -2);
 
-                //display the ingredients in a toast
                 toast.info(ingredient, {
                     position: "top-center",
                     autoClose: 5000,
@@ -119,7 +118,7 @@ function ExtractIngredients() {
             <tbody>
                 {recipeList.map((recipe) => (
                     <tr key={recipe.recipeid}>
-                        <td>{recipe.recipename}</td>
+                        <td>{recipe.title}</td>
                         <td><button onClick={() => getIngredients(recipe.recipeid)}>Extract Ingredients</button></td>
                     </tr>
                 ))}

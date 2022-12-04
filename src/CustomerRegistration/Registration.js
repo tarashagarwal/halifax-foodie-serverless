@@ -130,25 +130,6 @@ function Regisration() {
     return true;
   }
 
-
-//Author(s) name: Firebase Documentation
-//Date: 28 November 2022
-//Title of program/source code: Add data to Cloud Firestore
-//Code version: v1
-//Type: Code
-//Web address: https://firebase.google.com/docs/firestore/manage-data/add-data
-
-//This function is used to store user information in firestore
-  const storeUserInFirestore = async () => {
-    data = {
-      answer1: formData.answer1,
-      answer2: formData.answer2,
-      answer3: formData.answer3,
-    }
-    await setDoc(doc(db, "QuestionAnswers", formData.email), data);
-  }
-
-
 //Author(s) name: MDN Web Docs
 //Date: 28 November 2022
 //Title of program/source code: Using the Fetch API
@@ -197,6 +178,38 @@ function Regisration() {
       });
   }
 
+
+
+
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call cloud function using fetch API
+const storeQnA = () => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify(formData)
+  };
+
+  fetch('https://us-central1-halifaxfoodie-364105.cloudfunctions.net/storeDataInFirestore', requestOptions)
+    .then(async response => {
+      const data = await response.json();
+      console.log(response);
+      alert("Please save this CipherText. You will need this to login." + JSON.stringify(data));
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+    });
+}
+
+
+
+
+
   const FormTitles = ["Registration1", "Registration2", "Registration3"];
 
   const PageDisplay = () => {
@@ -215,9 +228,10 @@ function Regisration() {
         console.log(formData);
         storeUserInCognito();
         storeDataInDynamoDB();
-        storeUserInFirestore();
+        storeQnA();
         generateCipherText();
         navigate('/login');
+    
       }
     }
     else {

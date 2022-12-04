@@ -67,34 +67,7 @@ function Login() {
     return true;
   }
 
-//Author(s) name: SoftAuuthor
-//Date: 28 November 2022
-//Title of program/source code: Firebase 9 Firestore Get A Document By ID Using getDoc()
-//Code version: v1
-//Type: Code
-//Web address: https://softauthor.com/firebase-firestore-get-document-by-id/
 
-  //This function is used to get answers to security questions from firestore and compare them to the answers entered by the user
-  const getdata = async () => {
-    const docRef = doc(db, "QuestionAnswers", formData.email);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      var answer1 = docSnap.data().answer1;
-      var answer2 = docSnap.data().answer2;
-      var answer3 = docSnap.data().answer3;
-      if (answer1 === formData.answer1 && answer2 === formData.answer2 && answer3 === formData.answer3) {
-        //navigate user to the next page of the form
-        setPage((currPage) => currPage + 1);
-      }
-      else {
-        alert("Incorrect answers");
-      }
-    } else {
-      console.log("No such document!");
-    }
-  }
 
   //Author(s) name: AWS Developer Guide
   //Date: 28 November 2022
@@ -123,6 +96,32 @@ function Login() {
       }
     })
   }
+
+
+//Author(s) name: MDN Web Docs
+//Date: 28 November 2022
+//Title of program/source code: Using the Fetch API
+//Code version: v1
+//Type: Code
+//Web address: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+//This function is used to call cloud function using fetch API
+const authenticateQnA = () => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify(formData)
+  };
+
+  fetch('https://us-central1-halifaxfoodie-364105.cloudfunctions.net/checkanswers', requestOptions)
+    .then(async response => {
+      const data = await response.json();
+      console.log(response);
+      alert("Please save this CipherText. You will need this to login." + JSON.stringify(data));
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+    });
+}
 
 
 //Author(s) name: MDN Web Docs
@@ -275,7 +274,7 @@ const ciphertextforRestaurant = () => {
       }
       else if (page === 1) {
         if (formValidation2(formData)) {
-          getdata();
+        authenticateQnA();
         }
       }
       else if (page === 2) {

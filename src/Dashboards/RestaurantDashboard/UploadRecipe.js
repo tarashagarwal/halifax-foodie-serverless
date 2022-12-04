@@ -138,7 +138,7 @@ function UploadRecipe() {
             <tbody>
                 {recipeList.map((recipe) => (
                     <tr key={recipe.recipeid}>
-                        <td>{recipe.recipename}</td>
+                        <td>{recipe.title}</td>
                         <td>Yes</td>
                     </tr>
                 ))}
