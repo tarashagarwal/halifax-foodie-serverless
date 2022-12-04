@@ -100,7 +100,6 @@ function Login() {
     fetch('https://3tesarwbkmin5m2u2ilxmsrb4a0fibfb.lambda-url.us-east-1.on.aws/', requestOptions)
       .then(async response => {
         const data = await response.json();
-
         console.log(response);
         var ciphertext = JSON.stringify(data);
         var stringwithoutquotes = ciphertext.replace(/['"]+/g, '');

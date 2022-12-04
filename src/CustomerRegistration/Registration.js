@@ -158,7 +158,6 @@ function Regisration() {
         alert("Please save this CipherText. You will need this to login." + JSON.stringify(data));
       })
       .catch(error => {
-
         console.error('There was an error!', error);
       });
   }

@@ -25,13 +25,11 @@ function App() {
       <Route exact path="/RestaurantDashboard" element={<RestaurantDashboard/>}/>
       <Route exact path="/UploadRecipe" element={<UploadRecipe/>}/>
       <Route exact path="/ExtractIngredients" element={<ExtractIngredients/>}/> 
-      <Route path="/online-support" element={<OnlineSupport />} />
-      <Route path="/chat" element={<Chat />} />
+      <Route path="/online-support" element={<OnlineSupport />}/>
+      <Route path="/chat" element={<Chat />}/>
       <Route exact path="/visual" element={<Visual/>}/>
-
-</Routes>
+    </Routes>
     </BrowserRouter>
-    
   );
 }
 

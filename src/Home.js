@@ -11,8 +11,9 @@ function Home  () {
         <button onClick={() => navigate(`/login`)}>Login</button>
       
         <button onClick={() => navigate(`/register`)}>Register</button>
-      
-        
+
+        <button onClick={() => navigate(`/online-support`)}>Chat</button>
+  
     </div>
   );
 }

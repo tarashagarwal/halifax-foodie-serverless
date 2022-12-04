@@ -24,7 +24,10 @@ function RestaurantDashboard() {
     const navigateShowVisualizations = () => {
         navigate(`/visual`)
     }
-    
+
+    const navigateChat = () => {
+        navigate(`/chat`)
+    }
 
     return (
         <div style={{ backgroundColor: "#F5F5F5" }}>
@@ -37,6 +40,8 @@ function RestaurantDashboard() {
             </div>
             <div>
             <button onClick={navigateShowVisualizations}> Show Visualizations</button>
+
+            <button onClick={navigateChat}>Chat</button>
                 <div>
                     <button onClick={logout}>logout</button>
                 </div>
