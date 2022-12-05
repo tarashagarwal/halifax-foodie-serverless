@@ -1,0 +1,26 @@
+.chat-panel{
+    height: 300px;
+    width: 350px;
+    display: inline-table;
+    align-items: left;
+    margin: 10px 10px 2px 10px;
+}
+
+.chat-window{
+    height: 280px;
+    width: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 1px;
+    text-align: right;
+}
+
+.chat-button{
+    width:100%;
+}
+
+.chat-text-box{
+    width: 100%;
+}

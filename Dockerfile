@@ -1,17 +1,26 @@
-#stage 0 -Building front end assets
-FROM node:2.16.3-alpine as build
+# FROM node:16.10.0 as build
+# WORKDIR /lit-clothing
 
+# COPY package*.json ./
+# RUN npm install
+# COPY . .
+
+# RUN npm run build
+# FROM nginx:1.19
+# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+# COPY --from=build /lit-clothing/build /usr/share/nginx/html
+
+FROM node:14-alpine AS development
+ENV NODE_ENV development
+# Add a work directory
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+# Cache and Install dependencies
+COPY package.json .
+# COPY yarn.lock .
+RUN yarn install
+# Copy app files
 COPY . .
-RUN npm run build
-
-#stage 1 -  Server Frontend Assets
-FROM fholzer/nginx-brotli:v1.12.2
-WORKDIR /etc/nginx
-ADD nginx.conf /etc/nginx/nginx.conf
-
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 443
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port
+EXPOSE 3000
+# Start the app
+CMD [ "yarn", "start" ]

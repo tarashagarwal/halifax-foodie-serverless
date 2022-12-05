@@ -1,0 +1,24 @@
+.chat-msg-rt{
+	margin: 4px;
+	width: fit-content;
+	max-width: 50%;
+    border: 1px solid black;
+    overflow-wrap: break-word;
+    background-color: #f1a762;
+    text-align: left;
+    padding: 5px;
+    float: right;
+}
+
+
+.chat-msg-lt{
+	margin: 4px;
+	width: fit-content;
+    border: 1px solid black;
+    overflow-wrap: break-word;
+    background-color: #abdbe3;
+    text-align: left;
+    padding: 5px;
+    max-width: 50%;
+    float: left;
+}
