@@ -1,0 +1,12 @@
+//Create Auto ML using the column tag which is the extracted tag from the ingredients.
+
+CREATE OR REPLACE MODEL s3_recipe_data.automl_recipe
+       OPTIONS(model_type='AUTOML_Classifier',
+               input_label_cols=['tag'])
+AS SELECT
+  name, id, tag
+FROM `s3_recipe_data.s3_data`
+
+//Run the auto ML Predictions
+SELECT * FROM ML.PREDICT(MODEL `csci5408-365812.s3_recipe_data.automl_recipe`, (
+    SELECT * FROM `csci5408-365812.s3_recipe_data.s3_data` LIMIT 10))

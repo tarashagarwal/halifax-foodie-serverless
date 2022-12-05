@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "serverlessg4",
+  "private_key_id": "588a81b09501fefdf6b72c2b2842860db64b23e8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCjBrXDVm1uE3Sb\nKbw/fyRZiDE8WCxRdnk+QgufhUM4vt8bDe+qob27QfF7+Sv8XfGWWtnfPwCPPD3F\nM1KFfXpNUwN6yZ6sqfkAQe8e7w95TIxxW1OXlyrA9J3Gfu9kqocdTDydq5bFw9lt\nSB2SB0bL/vjiyaDGH/3/7BPq1w+edbtgz3UH2KfNg9/SkSRjMvVc1z0KTsEigBja\nZmsGBcxvsOr1NkDfJ3wVyrCidf9rnaGxUj60sVOQBAIRT/BMQaigEq8DRW9zCMu+\nkmr0vonKvoPFA/Zc7HXGZG1UNh/ZUoNR/WPM4gS7BS7qa1OSA8OFPxKqrIeVxSGW\ntVHJVI6jAgMBAAECggEAFm5ybRXDyd0Ycs8bzVrXrBAOwkBZnL3h8dyRj9n8xV6S\nAT16KC7IFe99ZDMFR9y/RJJsnwiisZK25x7oMGDzBpexB2CdmiFrFwt7dPSs2uJb\nAq/vwRB2PAWMfgbyNpY2MCRQxNsazExl6uD83J5usdv77+yRWCGHyAJ6PRppVkKh\nL/ASoaGa6H7tK7UOWcqpxVi3ISsK5AHE7SpPaQeCbI+9aXIR/ChoaFUblaRNPugy\nfViD+uy2puWJ4CixBeCbMaKNNlbdM1hkeA5q39UjYlJZhzraRa0RKdrSx6gyp4QH\nGcTiAQEqnhPpeZrkLBbf/dTykOYDyp9mdGicfy8f/QKBgQDl/LVSi75/vYkUqNfM\nzukcU+1UuopzC+rEmOa2sHYDmPs+Vh40KIF49XDxLaOaJyM13UA1Ek/zCSEe9cEa\ntWDX4A/cdq/aKNnI1yMckbN1E3GhUY21mL+mHq0xKV79+uy65NnPi7TLqGScvtxy\n7fOJtIMH5bknEaO93C4MmrsyjQKBgQC1dyTV4oJ4veWYp5wSNubTB7xmcsQP4s+d\nN9NZ56QKpJkWS48hXDQR8/MJtyu2GZVsHG868rdoknazw1KAhOAwWA6NMoRrtTG6\nUG+FZeyn281g6J0Pn6vJXoASJt3SxS7KJk7r92NfOJGQ1drTNpt5CEeih0XUA4zT\nks9abEkR7wKBgQDTqkzG984PisTKuspBuHxakfNvc29Qirs6zO4pXSaAER/KM0AB\nCPZ/+IRFs5dKnJKPVF1vercSGmjdMZjTl/LVO2XdpW4a/lXRvg6WkJH1QjvmGESv\nyTE5FiqXgFfosDOHnm/Hz/BJL2XJzO7e55ioN/YQIqDREC7+4dGP0ChRUQKBgGUq\nHub+eC5H74/DIUcmRFixn16d7J/Oml/Tl4gvk0w7pvy+8vRuKrk3fu6Tp1LFwH+c\n+oWqeoVZ4cMlyQDNEw7giHw/BYPmZ+qunP2JbP3HlB/KjoT/Rw3kGRIFiPTP6N3Z\nrXXvXP7g0oYkMvI9Jz+6VfVN5KflssTgu6h1ZecRAoGAcb/iwK0Xzd0EMenmP4JQ\niyMDedxTRmv7quOh5YEoIcwOJV+dIgeQLDaU2I5tU59Cut93mz5XffP9Z2ZIh8+y\npgR6DRv0wy7NfTBOXFisRCMRsQJsa19x6ws+x9aUSmNl2jg5VzyV/l44hJ9dlFsY\nrp5s/ogg9WhdZsgMJ8/n1Rc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "lambda-service-account@serverlessg4.iam.gserviceaccount.com",
+  "client_id": "102245845612037176193",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lambda-service-account%40serverlessg4.iam.gserviceaccount.com"
+}
